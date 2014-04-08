@@ -5,23 +5,32 @@
  * @return {string} newTime - The new time
  */
 function addMinutes(time,minutes){
-    var period
-    var today = new Date()
-    var t = new Date( today.toDateString() + ' ' + time )
-    var newTime = new Date(t.getTime() + minutes*60000).toTimeString()
-    // Just get the time
-    newTime = newTime.split(' ')
-    newTime = newTime[0].split(':')
-    // Remove Seconds
-    newTime.pop()
-    if(Number(newTime[0]) > 11){
-        newTime[0] = Number(newTime[0]) - 12
-        period = "PM";
-    } else{
-        newTime[0] = parseInt(Number(newTime[0]), 10)
-        period = "AM"
+    var period, newTime
+    time = time.split(' ')
+    period = time[1]
+    newTime = time[0].split(':')
+    if(period == "PM")
+        newTime[0] = Number(newTime[0]) + 12
+    
+    var timeAsMinutes = (Number(newTime[0]) * 60) + Number(newTime[1]) + minutes;
+    var timeAsDecimal = Number(timeAsMinutes) / 60;
+    var reconvertedTime = timeAsDecimal.toString().split('.');
+    var hours = Number(reconvertedTime[0]);
+    var minutes = Number("." + reconvertedTime[1]) * 60;
+    var finalTime = [hours, Math.round(minutes)];
+    if(Number(finalTime[1]) > 60){
+        finalTime[0] = Number(finalTime[0]) + (Number(finalTime[1]) / 60)
+        finalTime[1] = (Number(finalTime[0]) % 60) + Number(finalTime[1])
     }
-    if(Number(newTime[0]) == 0)
-        newTime[0] = 12
-    return newTime.join(":") + " " + period
+    if(Number(finalTime[0]) >= 12){
+        finalTime[0] = Number(finalTime[0]) - 12
+        period = period == "PM" ? "AM" : "PM"
+    }else{
+        finalTime[0] = parseInt(Number(finalTime[0]), 10)
+    }
+    if(Number(finalTime[0]) == 0){
+        finalTime[0] = 12
+        period = "PM"
+    }
+    return finalTime.join(":") + " " + period
 }
