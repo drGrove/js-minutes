@@ -1,0 +1,24 @@
+{
+  "name": "js-minutes",
+  "version": "1.0.0",
+  "description": "Minutes Test",
+  "main": "src/minutes.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/drGrove/js-minutes.git"
+  },
+  "author": "Daniel Grove <danny@drgrovellc.com>",
+  "license": "Apache2",
+  "bugs": {
+    "url": "https://github.com/drGrove/js-minutes/issues"
+  },
+  "homepage": "https://github.com/drGrove/js-minutes",
+  "devDependencies": {
+    "grunt": "^0.4.4",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-jasmine": "^0.6.3"
+  }
+}
