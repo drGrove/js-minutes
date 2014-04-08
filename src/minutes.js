@@ -5,15 +5,15 @@
  * @return {string} newTime - The new time
  */
 function addMinutes(time,minutes){
-    var period;
+    var period
     var today = new Date()
     var t = new Date( today.toDateString() + ' ' + time )
     var newTime = new Date(t.getTime() + minutes*60000).toTimeString()
     // Just get the time
-    newTime = newTime.split(' ');
-    newTime = newTime[0].split(':');
+    newTime = newTime.split(' ')
+    newTime = newTime[0].split(':')
     // Remove Seconds
-    newTime.pop();
+    newTime.pop()
     if(Number(newTime[0]) > 11){
         newTime[0] = Number(newTime[0]) - 12
         period = "PM";
